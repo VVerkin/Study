@@ -8,5 +8,12 @@
 
 */
 
-const getNod = (a, b) => Math.abs(b) == 0 ? Math.abs(a) : getNod(Math.abs(b), Math.abs(a) % Math.abs(b));
-console.log(getNod(64, 48));
+const getNod = (a, b) => {
+  if (Math.abs(b) === 0) {
+  return Math.abs(a);
+} else {
+  return getNod(Math.abs(b), Math.abs(a) % Math.abs(b));
+}
+}
+
+console.log(getNod(14, 0));
