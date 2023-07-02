@@ -20,19 +20,19 @@
 const calculate = (basketAmount, goodsCount, promo) => {
   let totalPrice = basketAmount; {
     if (goodsCount > 10) {
-      totalPrice = totalPrice *= 0.97;
+      totalPrice *= 0.97;
     }
 
     if (totalPrice > 30000) {
-      totalPrice = totalPrice = 30000 + (totalPrice - 30000) * 0.85;
+      totalPrice = 30000 + (totalPrice - 30000) * 0.85;
     }
 
     if (promo === 'METHED') {
-      totalPrice = totalPrice *= 0.9;
+      totalPrice *= 0.9;
     }
 
     if (promo === 'G3H2Z1' && totalPrice > 2000) {
-      totalPrice = totalPrice -= 500;
+      totalPrice -= 500;
     }
     return totalPrice;
   }
