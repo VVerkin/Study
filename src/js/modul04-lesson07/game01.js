@@ -20,19 +20,25 @@ const getNumber = () => {
 
   while (true) {
 
-    let userNumber = +prompt('Введи загаданное число от 1 до 100', '');
+    let userNumber = prompt('Введи загаданное число от 1 до 100', '');
+
+    if (userNumber === null) {
+      break;
+    }
+
+    userNumber = +userNumber;
 
     if (isNaN(userNumber)) {
       alert( 'Введи число' );
       continue;
     } 
 
-    if (userNumber === null) {
-      // alert('Игра закончилась');
-      break;
-    }
+    if (userNumber < 1 || userNumber > 100) {
+      alert( 'Число должно быть от 1 до 100' );
+      continue;
+    } 
 
-    if (userNumber === guessNumber) {
+    if (+userNumber === guessNumber) {
       alert('Правильно!');
       break;
       } else if (userNumber > guessNumber) {
