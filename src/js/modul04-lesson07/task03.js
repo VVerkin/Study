@@ -27,7 +27,6 @@ const randomArray = (length, n, m, str) => {
 				i++;
 			}
 		}
-		return arr;
 	} else if (str === 'even') {
 		while (i < length) {
 			num = Math.floor(Math.random() * (Math.max(n, m) - Math.min(n, m) + 1)) + Math.min(n, m);
@@ -36,15 +35,14 @@ const randomArray = (length, n, m, str) => {
 				i++;
 			}
 		}
-		return arr;
 	} else {
 		while (i < length) {
 			num = Math.floor(Math.random() * (Math.max(n, m) - Math.min(n, m) + 1)) + Math.min(n, m);
 			arr.push(num);
 			i++;
 		}
-		return arr;
 	}
+	return arr;
 };
 
 console.log('even', randomArray(10, -5, 10, 'even'));
