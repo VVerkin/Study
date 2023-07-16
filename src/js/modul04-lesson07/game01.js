@@ -30,7 +30,7 @@ const getNumber = () => {
 
     if (isNaN(userNumber)) {
       alert( 'Введи число' );
-      continue;
+      // continue;
     } 
 
     if (userNumber < 1 || userNumber > 100) {

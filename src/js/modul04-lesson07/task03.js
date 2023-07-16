@@ -14,9 +14,39 @@
 
 */
 
-const randomArray = (length, n, m, str) => (
-  [...new Array(length)]
-    .map(() => Math.floor(Math.random() * (Math.max(n, m) - Math.min(n, m) + 1)) + Math.min(n, m))
-    .filter(item => item % 2 == (str == 'odd')));
-console.log(randomArray(10, 1, 10, 'odd'));
-console.log(randomArray(10, 1, 10, 'even'));
+const randomArray = (length, n, m, str) => {
+
+	const arr = [];
+	let num;
+	let i = 0;
+	if (str === 'odd') {
+		while (i < length) {
+			num = Math.floor(Math.random() * (Math.max(n, m) - Math.min(n, m) + 1)) + Math.min(n, m);
+			if (num % 2 === 0) {
+				arr.push(num);
+				i++;
+			}
+		}
+		return arr;
+	} else if (str === 'even') {
+		while (i < length) {
+			num = Math.floor(Math.random() * (Math.max(n, m) - Math.min(n, m) + 1)) + Math.min(n, m);
+			if (num % 2 !== 0) {
+				arr.push(num);
+				i++;
+			}
+		}
+		return arr;
+	} else {
+		while (i < length) {
+			num = Math.floor(Math.random() * (Math.max(n, m) - Math.min(n, m) + 1)) + Math.min(n, m);
+			arr.push(num);
+			i++;
+		}
+		return arr;
+	}
+};
+
+console.log('even', randomArray(10, -5, 10, 'even'));
+console.log('odd', randomArray(10, -5, 10, 'odd'));
+console.log('empty', randomArray(10, -5, 10));
