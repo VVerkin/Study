@@ -16,7 +16,7 @@ m и n включительно
 */
 
 const randomArray = (length, n, m) => (
-  [...new Array(length)] // генерируем массив нужной длинны с помощью конструктора
-    .map(() => Math.floor(Math.random() * (Math.max(n, m) - Math.min(n, m) + 1)) + Math.min(n, m))
-    );
+	[...new Array(length)] // генерируем массив нужной длинны с помощью конструктора
+		.map(() => Math.floor(Math.random() * (Math.max(n, m) - Math.min(n, m) + 1)) + Math.min(n, m))
+);
 console.log(randomArray(10, -5, 50)); // передаем в консоль массив длинной 10 элементов и минимальным и максимальным числами

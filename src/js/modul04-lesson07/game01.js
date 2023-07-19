@@ -18,36 +18,36 @@ console.log(`Загаданное число ${guessNumber}`);
 
 const getNumber = () => {
 
-  while (true) {
+	while (true) {
 
-    let userNumber = prompt('Введи загаданное число от 1 до 100', '');
+		let userNumber = prompt('Введи загаданное число от 1 до 100', '');
 
-    if (userNumber === null) {
-      break;
-    }
+		if (userNumber === null) {
+			break;
+		}
 
-    userNumber = +userNumber;
+		userNumber = +userNumber;
 
-    if (isNaN(userNumber)) {
-      alert( 'Введи число' );
-      // continue;
-    } 
+		if (isNaN(userNumber)) {
+			alert( 'Введи число' );
+			// continue;
+		} 
 
-    if (userNumber < 1 || userNumber > 100) {
-      alert( 'Число должно быть от 1 до 100' );
-      continue;
-    } 
+		if (userNumber < 1 || userNumber > 100) {
+			alert( 'Число должно быть от 1 до 100' );
+			continue;
+		} 
 
-    if (+userNumber === guessNumber) {
-      alert('Правильно!');
-      break;
-      } else if (userNumber > guessNumber) {
-        alert('Меньше');
-      } else if (userNumber < guessNumber) {
-        alert('Больше');
-      }
-  }
-}
+		if (userNumber === guessNumber) {
+			alert('Правильно!');
+			break;
+		} else if (userNumber > guessNumber) {
+			alert('Меньше');
+		} else if (userNumber < guessNumber) {
+			alert('Больше');
+		}
+	}
+};
 
 getNumber();
 

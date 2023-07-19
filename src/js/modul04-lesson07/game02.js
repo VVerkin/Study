@@ -10,11 +10,76 @@
 если диапазон от 50 до 100, то попыток бот даёт 15
 если попытки закончились игра прекращается
 */
+let min = +prompt('Введи первое число', '');
+let max = +prompt('Введи второе число', '');
+// let attempt = Math.ceil((max - min + 1) * 0.3);
+let attempt = Math.ceil((Math.max(min, max) - Math.min(min, max) + 1) * 0.3);
+
+if ((Math.max(min, max) - Math.min(min, max) + 1) >= 50 && (Math.max(min, max) - Math.min(min, max) + 1) <= 100) {
+	attempt = 15;
+}
+
+console.log(`первое число ${min}`);
+console.log(`второе число ${max}`);
+console.log(`количество возможных попыток ${attempt}`);
+
+const getRandomNumber = (min, max) => {
+	return Math.floor(Math.random() * ((Math.max(min, max) - Math.min(min, max) + 1)) + Math.min(min, max));
+};
+
+const randomNumber = getRandomNumber(min,max);
+console.log(randomNumber);
 
 
+const getNumber = () => {
+	const arr = [];
+	let count = 0;
 
+	while (true) {
 
+		let userNumber = prompt('Введи загаданное число', '');
 
+		if (userNumber === null) {
+			break;
+		}
 
+		userNumber = +userNumber;
 
+		if (isNaN(userNumber)) {
+			alert( 'Введи число' );
+		} 
 
+		if (count >= attempt) {
+			alert('Попытки закончились!');
+			break;
+		}
+
+		if (userNumber < 1 || userNumber > 100) {
+			alert( 'Число должно быть от 1 до 100' );
+			continue;
+		} 
+
+		if (arr.includes(userNumber)) {
+			alert('Это число вы уже вводили');
+			continue;
+		}
+
+		if (userNumber === randomNumber) {
+			alert('Правильно!');
+			arr.push(userNumber);
+			break;
+		} else if (userNumber > randomNumber) {
+			alert('Меньше');
+			arr.push(userNumber);
+		} else if (userNumber < randomNumber) {
+			alert('Больше');
+			arr.push(userNumber);
+		}
+		count += 1;
+	}
+
+	console.log(arr);
+	console.log(`Количество использованных попыток ${count}`);
+};
+
+getNumber();
