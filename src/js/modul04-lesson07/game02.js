@@ -10,9 +10,18 @@
 если диапазон от 50 до 100, то попыток бот даёт 15
 если попытки закончились игра прекращается
 */
-let min = +prompt('Введи первое число', '');
-let max = +prompt('Введи второе число', '');
-// let attempt = Math.ceil((max - min + 1) * 0.3);
+
+let min;
+let max;
+
+do {
+	min = +prompt('Введи первое число от 1 до 100', '');
+} while (isNaN(min) || min < 1 || min > 100);
+
+do {
+	max = +prompt('Введи второе число от 1 до 100', '');
+} while (isNaN(max) || max < 1 || max > 100);
+
 let attempt = Math.ceil((Math.max(min, max) - Math.min(min, max) + 1) * 0.3);
 
 if ((Math.max(min, max) - Math.min(min, max) + 1) >= 50 && (Math.max(min, max) - Math.min(min, max) + 1) <= 100) {
@@ -37,7 +46,7 @@ const getNumber = () => {
 
 	while (true) {
 
-		let userNumber = prompt('Введи загаданное число', '');
+		let userNumber = prompt(`Введи загаданное число. Осталось попыток: ${attempt - count}`, '');
 
 		if (userNumber === null) {
 			break;
@@ -79,7 +88,7 @@ const getNumber = () => {
 	}
 
 	console.log(arr);
-	console.log(`Количество использованных попыток ${count}`);
+	console.log(`Количество использованных попыток ${count + 1}`);
 };
 
 getNumber();
