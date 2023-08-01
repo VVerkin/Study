@@ -15,11 +15,11 @@ let min;
 let max;
 
 do {
-	min = +prompt('Введи первое число от 1 до 100', '');
+	min = +prompt('Введите первое число от 1 до 100', '');
 } while (isNaN(min) || min < 1 || min > 100);
 
 do {
-	max = +prompt('Введи второе число от 1 до 100', '');
+	max = +prompt('Введите второе число от 1 до 100', '');
 } while (isNaN(max) || max < 1 || max > 100);
 
 let attempt = Math.ceil((Math.max(min, max) - Math.min(min, max) + 1) * 0.3);
@@ -46,7 +46,7 @@ const getNumber = () => {
 
 	while (true) {
 
-		let userNumber = prompt(`Введи загаданное число. Осталось попыток: ${attempt - count}`, '');
+		let userNumber = prompt(`Введите загаданное число. Осталось попыток: ${attempt - count}`, '');
 
 		if (userNumber === null) {
 			break;
@@ -55,7 +55,7 @@ const getNumber = () => {
 		userNumber = +userNumber;
 
 		if (isNaN(userNumber)) {
-			alert( 'Введи число' );
+			alert( 'Введите число' );
 		} 
 
 		if (count >= attempt) {
@@ -69,7 +69,7 @@ const getNumber = () => {
 		} 
 
 		if (arr.includes(userNumber)) {
-			alert('Это число вы уже вводили');
+			alert('Это число Вы уже вводили');
 			continue;
 		}
 
