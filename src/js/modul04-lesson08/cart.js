@@ -81,8 +81,12 @@ const cart = {
 	totalPrice: 0,
 	count: 0,
 
-	getTotalPrice() {
+	/*getTotalPrice() {
 		return this.totalPrice;
+	},*/
+
+	get totalPrice() {
+		return this.calculateItemPrice();
 	},
 
 	add(name, price, amount = 1) {
@@ -93,7 +97,7 @@ const cart = {
 		};
 		this.items.push(item);
 		this.increaseCount(amount);
-		this.calculateItemPrice();
+		// this.calculateItemPrice();
 	},
 
 	increaseCount(amount) {
@@ -101,7 +105,8 @@ const cart = {
 	},
 
 	calculateItemPrice() {
-		this.totalPrice = this.items.reduce((acc, item) => acc+ (item.price * item.amount), 0);
+		// this.totalPrice = this.items.reduce((acc, item) => acc+ (item.price * item.amount), 0);
+		return this.items.reduce((acc, item) => acc+ (item.price * item.amount), 0);
 	},
 
 	clear() { 
@@ -117,7 +122,10 @@ const cart = {
 	},
 
 };
+
+
 cart.add('вилка', 3);
 cart.add('ложка', 4, 2);
 cart.add('нож', 5, 3);
+cart.totalPrice = 10;
 cart.print();
