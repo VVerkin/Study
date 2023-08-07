@@ -127,5 +127,5 @@ const cart = {
 cart.add('вилка', 3);
 cart.add('ложка', 4, 2);
 cart.add('нож', 5, 3);
-cart.totalPrice = 10;
+// cart.totalPrice = 10;
 cart.print();
