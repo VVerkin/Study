@@ -1,6 +1,6 @@
 'use strict';
 
-/* 
+/*
 
 Объект будет содержать следующие свойства:
 
@@ -24,11 +24,10 @@ getTotalPrice()
 метод возвращает значение свойства totalPrice
 
 
-
 calculateItemPrice()
 
-пересчитывает стоимость всей корзины используя метод reduce и записывает значение в totalPrice 
-
+пересчитывает стоимость всей корзины используя метод reduce
+и записывает значение в totalPrice
 
 
 increaseCount()
@@ -38,7 +37,6 @@ increaseCount()
 Увеличивает свойство count на это число
 
 
-
 add()
 
 Принимает три параметра:
@@ -46,10 +44,11 @@ add()
 название товара
 цену товара
 количество товара (опциональный параметр, по умолчанию 1 товар)
-этот метод формирует объект из полученных параметров и добавляет его в свойство items
+этот метод формирует объект из полученных параметров
+и добавляет его в свойство items
 
-так же вызывает все необходимые методы чтобы свойства count и totalPrice были актуальные
-
+так же вызывает все необходимые методы чтобы
+свойства count и totalPrice были актуальные
 
 
 clear()
@@ -57,19 +56,13 @@ clear()
 Очищает полностью нашу корзину, возвращает все значения в изначальные
 
 
-
 print()
 
-Выводит в консоль JSON строку из массива items и на следующей строке выводит общую стоимость корзины
-
-
-
-
-
+Выводит в консоль JSON строку из массива items
+и на следующей строке выводит общую стоимость корзины
 
 
 Для проверки работы функционала добавить 3 или более товаров в корзину
-
 
 
 После вызвать метод print для вывода информации в консоль
@@ -77,54 +70,49 @@ print()
 */
 
 const cart = {
-	items: [],
-	totalPrice: 0,
-	count: 0,
+  items: [],
+  count: 0,
 
-	/*getTotalPrice() {
-		return this.totalPrice;
-	},*/
+  get totalPrice() {
+    return this.calculateItemPrice();
+  },
 
-	get totalPrice() {
-		return this.calculateItemPrice();
-	},
+  add(name, price, amount = 1) {
+    const item = {
+      name,
+      price,
+      amount,
+    };
+    this.items.push(item);
+    this.increaseCount(amount);
+    // this.calculateItemPrice();
+  },
 
-	add(name, price, amount = 1) {
-		const item = {
-			name,
-			price,
-			amount,
-		};
-		this.items.push(item);
-		this.increaseCount(amount);
-		// this.calculateItemPrice();
-	},
+  increaseCount(amount) {
+    this.count += amount;
+  },
 
-	increaseCount(amount) {
-		this.count += amount;
-	},
+  calculateItemPrice() {
+    return this.items.reduce((acc, item) =>
+      acc + (item.price * item.amount), 0);
+  },
 
-	calculateItemPrice() {
-		// this.totalPrice = this.items.reduce((acc, item) => acc+ (item.price * item.amount), 0);
-		return this.items.reduce((acc, item) => acc+ (item.price * item.amount), 0);
-	},
+  clear() {
+    this.items = [];
+    this.totalPrice = 0;
+    this.count = 0;
+  },
 
-	clear() { 
-		this.items = [];
-		this.totalPrice = 0;
-		this.count = 0;
-	},
-
-	print() {
-		console.log(JSON.stringify(this.items));
-		console.log(` Total price: ${this.totalPrice} `);
-		console.log(` Count: ${this.count} `);
-	},
+  print() {
+    console.log(JSON.stringify(this.items));
+    console.log(` Total price: ${this.totalPrice} `);
+    console.log(` Count: ${this.count} `);
+  },
 
 };
 
 
-cart.add('вилка', 3);
+cart.add('вилка', 4);
 cart.add('ложка', 4, 2);
 cart.add('нож', 5, 3);
 // cart.totalPrice = 10;
