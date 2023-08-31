@@ -9,8 +9,13 @@
 или больше, то функция возвращает этот массив.
 */
 
-const arr = [];
+const arr = [1, 2, 3];
 
-const addNunToArr = (arr) => {
-  
-}
+const addNumToArr = (arr) => {
+  const randomNumber = Math.floor(Math.random() * 10 + 1);
+  arr.push(randomNumber);
+  console.log(randomNumber);
+  console.log(arr);
+};
+
+console.log(addNumToArr(arr));

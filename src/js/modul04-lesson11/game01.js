@@ -1,8 +1,9 @@
 'use strict';
 
-/* 
+/*
 Переписать игровой бот для игры "Угадай число"
-Функционал остаётся прежний, но вместо цикла (while или for) используйте рекурсию
+Функционал остаётся прежний, но вместо цикла
+(while или for) используйте рекурсию
 */
 
 const guessNumber = Math.floor(Math.random() * 100 + 1);
@@ -17,7 +18,7 @@ const getNumber = () => {
   } else if (userNumber < 1 || userNumber > 100) {
     alert('Число должно быть от 1 до 100');
     return getNumber();
-  };
+  }
 
   if (!isNaN(userNumber)) {
     userNumber = +userNumber;
