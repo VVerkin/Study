@@ -37,3 +37,5 @@ const getNumber = () => {
 };
 
 console.log(getNumber());
+
+
