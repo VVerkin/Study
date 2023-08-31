@@ -13,9 +13,15 @@ const arr = [1, 2, 3];
 
 const addNumToArr = (arr) => {
   const randomNumber = Math.floor(Math.random() * 10 + 1);
+  console.log(` Случайное число ${randomNumber}`);
   arr.push(randomNumber);
-  console.log(randomNumber);
-  console.log(arr);
+  console.log(` Массив ${arr}`);
+  const sum = arr.reduce((acc, item) => acc + item, 0);
+  console.log(` Сумма элементов массива ${sum}`);
+  if (sum >= 50) {
+    return arr;
+  } else {
+    return addNumToArr(arr);
+  };
 };
-
 console.log(addNumToArr(arr));
