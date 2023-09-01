@@ -22,6 +22,6 @@ const addNumToArr = (arr) => {
     return arr;
   } else {
     return addNumToArr(arr);
-  };
+  }
 };
 console.log(addNumToArr(arr));
