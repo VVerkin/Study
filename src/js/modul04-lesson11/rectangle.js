@@ -28,19 +28,21 @@ const rectangle = {
 
   set width(newWidth) {
     if (typeof newWidth === 'number') {
-      return this._width;
+      this._width = newWidth;
+      return;
     }
   },
 
   set height(newHeight) {
     if (typeof newHeight === 'number') {
-      return this._height;
+      this._height = newHeight;
+      return;
     }
   },
 };
 
-rectangle.newWidth = 100;
-rectangle.newHeight = '456';
+rectangle.width = 1;
+rectangle.height = 3;
 
 console.log(rectangle.perimeter);
 console.log(rectangle.square);
