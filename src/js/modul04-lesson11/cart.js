@@ -17,8 +17,6 @@
 процентному значению discount
 
 */
-console.log(100 * ((100 - 15)/100));
-
 const cart = {
   items: [],
   count: 0,
