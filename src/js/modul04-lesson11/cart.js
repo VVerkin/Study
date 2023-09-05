@@ -29,10 +29,8 @@ const cart = {
   set setDiscount(promocode) {
     if (promocode === 'METHED') {
       this._discount = 15;
-      return;
     } else if (promocode === 'NEWYEAR') {
       this._discount = 21;
-      return;
     }
   },
 
@@ -58,8 +56,8 @@ const cart = {
 
   clear() {
     this.items = [];
-    this.totalPrice = 0;
     this.count = 0;
+    this._discount = 0;
   },
 
   print() {
@@ -74,4 +72,12 @@ cart.setDiscount = 'METHED';
 cart.add('вилка', 4);
 cart.add('ложка', 4, 2);
 cart.add('нож', 5, 3);
+cart.print();
+
+cart.clear();
+console.log(cart);
+
+cart.setDiscount = 'NEWYEAR';
+cart.add('тарелка', 10, 2);
+cart.add('кружка', 2, 2);
 cart.print();
