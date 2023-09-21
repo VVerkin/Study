@@ -11,8 +11,8 @@
   const computerNumber = getRandomIntInclusive(0, 2);
   console.log(`Случайное число: ${computerNumber}`);
 
-  const computerChoise = figures[computerNumber];
-  console.log(`Выбор компьютера: ${computerChoise}`);
+  const computerChoice = figures[computerNumber];
+  console.log(`Выбор компьютера: ${computerChoice}`);
   
   const game = () => {
     const result = {
@@ -20,13 +20,22 @@
       computer: 0,
     };
     return function start() {
-      const userChoice = prompt(`Выбери: ${figures.join(', ')}`, '');
-      const userNumber = figures.indexOf(userChoice);
-      console.log(`Выбор пользователя: ${userChoice}`);
+      const getUserNumber = () => {
+        const userChoice = prompt(`Выбери: ${figures.join(', ')}`, '');
+        console.log(`Выбор пользователя: ${userChoice}`);
+        if (userChoice === null) {
+          return;
+        } else if (!figures.includes(userChoice.toLowerCase())) {
+          alert('Можно выбирать только предложенные варианты');
+          return getUserNumber();
+        }
+        return figures.indexOf(userChoice.toLowerCase());
+      };
+      const userNumber = getUserNumber();
       console.log(`Число пользователя: ${userNumber}`);
+
       const subtraction = computerNumber - userNumber;
       console.log(`разница: ${subtraction}`);
-      
       if (subtraction === 0) {
         alert('Ничья');
       } else if (subtraction === 1 || subtraction === -2) {
