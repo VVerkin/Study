@@ -8,10 +8,10 @@
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
-  const randomNumber = getRandomIntInclusive(0, 2);
-  console.log(`Случайное число: ${randomNumber}`);
-  
-  const computerChoise = figures[randomNumber];
+  const computerNumber = getRandomIntInclusive(0, 2);
+  console.log(`Случайное число: ${computerNumber}`);
+
+  const computerChoise = figures[computerNumber];
   console.log(`Выбор компьютера: ${computerChoise}`);
   
   const game = () => {
@@ -21,6 +21,22 @@
     };
     return function start() {
       const userChoice = prompt(`Выбери: ${figures.join(', ')}`, '');
+      const userNumber = figures.indexOf(userChoice);
+      console.log(`Выбор пользователя: ${userChoice}`);
+      console.log(`Число пользователя: ${userNumber}`);
+      const subtraction = computerNumber - userNumber;
+      console.log(`разница: ${subtraction}`);
+      
+      if (subtraction === 0) {
+        alert('Ничья');
+      } else if (subtraction === 1 || subtraction === -2) {
+        alert('Ты победил');
+        result.player += 1;
+      } else {
+        alert('Ты проиграл');
+        result.computer += 1;
+      }
+      console.log(result);
     };
   };
   window.RPS = game;
