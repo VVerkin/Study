@@ -10,10 +10,9 @@
   };
   const computerNumber = getRandomIntInclusive(0, 2);
   console.log(`Случайное число: ${computerNumber}`);
-
   const computerChoice = figures[computerNumber];
   console.log(`Выбор компьютера: ${computerChoice}`);
-  
+
   const game = () => {
     const result = {
       player: 0,
@@ -22,8 +21,8 @@
     return function start() {
       const getUserNumber = () => {
         const userChoice = prompt(`Выбери: ${figures.join(', ')}`, '');
-        console.log(`Выбор пользователя: ${userChoice}`);
         if (userChoice === null) {
+          console.log(`Выбор пользователя: ${userChoice}`);
           return;
         } else if (!figures.includes(userChoice.toLowerCase())) {
           alert('Можно выбирать только предложенные варианты');
@@ -34,19 +33,26 @@
       const userNumber = getUserNumber();
       console.log(`Число пользователя: ${userNumber}`);
 
-      const subtraction = computerNumber - userNumber;
-      console.log(`разница: ${subtraction}`);
-      if (subtraction === 0) {
-        alert('Ничья');
-      } else if (subtraction === 1 || subtraction === -2) {
-        alert('Ты победил');
-        result.player += 1;
-      } else {
-        alert('Ты проиграл');
-        result.computer += 1;
-      }
-      console.log(result);
+      const getWinner = () => {
+        const subtraction = computerNumber - userNumber;
+        console.log(`разница: ${subtraction}`);
+        if (subtraction === 1 || subtraction === -2) {
+          alert(`Ты победил! Компьютер выбрал ${computerChoice}`);
+          result.player += 1;
+        } else if (subtraction === -1 || subtraction === 2) {
+          alert(`Ты проиграл! Компьютер выбрал ${computerChoice}`);
+          result.computer += 1;
+        } else {
+          alert('Ничья');
+        }
+        console.log(result);
+      };
+      getWinner();
+      return start();
     };
+
   };
   window.RPS = game;
 })();
+
+
