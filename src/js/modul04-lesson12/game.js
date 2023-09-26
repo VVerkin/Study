@@ -40,15 +40,15 @@
 
         if (subtraction === 0) {
           alert('Ничья');
-          return;
+          return start();
         } else if (subtraction === 1 || subtraction === -2) {
           alert(`Ты победил! Компьютер выбрал ${computerChoice}`);
           result.player += 1;
-          return;
+          return start();
         } else if (subtraction === -1 || subtraction === 2) {
           alert(`Ты проиграл! Компьютер выбрал ${computerChoice}`);
           result.computer += 1;
-          return;
+          return start();
         }
         console.log(result);
       };
