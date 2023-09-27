@@ -22,8 +22,11 @@
       const getUserNumber = () => {
         let userChoice = prompt(`Выбери: ${figures.join(', ')}`, '');
         if (userChoice === null) {
+          const endGame = confirm('Точно хочешь выйти?');
+          if (endGame === false) {
+            return start();
+          }
           alert(`Счет: игрок - ${result.player}, компьютер - ${result.computer}`);
-          return;
         }
         if (userChoice.startsWith('к')) {
           userChoice = 'камень';
