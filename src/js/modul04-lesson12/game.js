@@ -20,15 +20,25 @@
       console.log(`Выбор компьютера: ${computerChoice}`);
 
       const getUserNumber = () => {
-        const userChoice = prompt(`Выбери: ${figures.join(', ')}`, '');
+        let userChoice = prompt(`Выбери: ${figures.join(', ')}`, '');
         if (userChoice === null) {
-          console.log(`Выбор пользователя: ${userChoice}`);
+          alert(`Счет: игрок - ${result.player}, компьютер - ${result.computer}`);
           return;
+        }
+        if (userChoice.startsWith('к')) {
+          userChoice = 'камень';
+        }
+        if (userChoice.startsWith('н')) {
+          userChoice = 'ножницы';
+        }
+        if (userChoice.startsWith('б')) {
+          userChoice = 'бумага';
         }
         if (!figures.includes(userChoice.toLowerCase())) {
           alert('Можно выбирать только предложенные варианты');
           return getUserNumber();
         }
+
         return figures.indexOf(userChoice.toLowerCase());
       };
       const userNumber = getUserNumber();
