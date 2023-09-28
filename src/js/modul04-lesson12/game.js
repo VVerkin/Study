@@ -9,43 +9,38 @@
       computer: 0,
     };
     return function start() {
-      const getRandomIntInclusive = (min, max) => {
+      const getRandomInt = (min, max) => {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1) + min);
       };
-      const computerNumber = getRandomIntInclusive(0, 2);
+      const computerNumber = getRandomInt(0, 2);
       console.log(`Случайное число: ${computerNumber}`);
       const computerChoice = figures[computerNumber];
       console.log(`Выбор компьютера: ${computerChoice}`);
 
-      const getUserNumber = () => {
-        let userChoice = prompt(`Выбери: ${figures.join(', ')}`, '');
-        if (userChoice === null) {
+      const getUserAnswer = () => {
+        const userAnswer = prompt(`Выбери: ${figures.join(', ')}`, '');
+        if (userAnswer === null) {
           const endGame = confirm('Точно хочешь выйти?');
           if (endGame === false) {
-            return start();
+            return getUserAnswer();
           }
           alert(`Счет: игрок - ${result.player}, компьютер - ${result.computer}`);
+          return;
         }
-        if (userChoice.startsWith('к')) {
-          userChoice = 'камень';
-        }
-        if (userChoice.startsWith('н')) {
-          userChoice = 'ножницы';
-        }
-        if (userChoice.startsWith('б')) {
-          userChoice = 'бумага';
-        }
-        if (!figures.includes(userChoice.toLowerCase())) {
+        const userChoice = figures.find(item =>item.startsWith(userAnswer.toLowerCase()));
+        console.log(`Выбор игрока: ${userChoice}`);
+
+        if (!figures.includes(userChoice)) {
           alert('Можно выбирать только предложенные варианты');
-          return getUserNumber();
+          return getUserAnswer();
         }
 
-        return figures.indexOf(userChoice.toLowerCase());
+        return figures.indexOf(userChoice);
       };
-      const userNumber = getUserNumber();
-      console.log(`Число пользователя: ${userNumber}`);
+      const userNumber = getUserAnswer();
+      console.log(`Число игрока: ${userNumber}`);
 
       const getWinner = () => {
         const subtraction = computerNumber - userNumber;
@@ -70,5 +65,3 @@
   };
   window.RPS = game;
 })();
-
-
