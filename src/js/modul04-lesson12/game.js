@@ -2,17 +2,12 @@
 
 (() => {
   const figures = ['камень', 'ножницы', 'бумага'];
-  const figuresEng = ['rock', 'scissors', 'paper'];
 
-  const game = (language) => {
+  const game = () => {
     const result = {
       player: 0,
       computer: 0,
     };
-    const lang = language === 'EN' || language === 'ENG' ?
-    figuresEng : figures;
-    console.log(lang);
-
     return function start() {
       const getRandomInt = (min, max) => {
         min = Math.ceil(min);
@@ -21,11 +16,11 @@
       };
       const computerNumber = getRandomInt(0, 2);
       console.log(`Случайное число: ${computerNumber}`);
-      const computerChoice = lang[computerNumber];
+      const computerChoice = figures[computerNumber];
       console.log(`Выбор компьютера: ${computerChoice}`);
 
-      const getUserAnswer = (language) => {
-        const userAnswer = prompt(`${lang.join(', ')} ?`, '');
+      const getUserAnswer = () => {
+        const userAnswer = prompt(`Выбери: ${figures.join(', ')}`, '');
         if (userAnswer === null) {
           const endGame = confirm('Точно хочешь выйти?');
           if (endGame === false) {
@@ -34,20 +29,20 @@
           alert(`Счет: игрок - ${result.player}, компьютер - ${result.computer}`);
           return;
         }
-        const userChoice = lang.find(item =>item.startsWith(userAnswer.toLowerCase()));
+        const userChoice = figures.find(item =>item.startsWith(userAnswer.toLowerCase()));
         console.log(`Выбор игрока: ${userChoice}`);
 
-        if (!lang.includes(userChoice)) {
+        if (!figures.includes(userChoice) || userAnswer === '') {
           alert('Можно выбирать только предложенные варианты');
           return getUserAnswer();
         }
 
-        return lang.indexOf(userChoice);
+        return figures.indexOf(userChoice);
       };
       const userNumber = getUserAnswer();
       console.log(`Число игрока: ${userNumber}`);
 
-      const getWinner = (lang) => {
+      const getWinner = () => {
         const subtraction = computerNumber - userNumber;
         console.log(`разница: ${subtraction}`);
 
