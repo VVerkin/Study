@@ -28,7 +28,8 @@
         const userAnswer = prompt(`${lang.join(', ')} ?`, '');
         if (userAnswer === null) {
           const endGame = language === 'EN' || language === 'ENG' ?
-          confirm('Do you want to quit the game?') : confirm('Точно хочешь выйти?');
+          confirm('Do you want to quit the game?') :
+          confirm('Точно хочешь выйти?');
 
           if (endGame === false) {
             return getUserAnswer();
@@ -43,7 +44,7 @@
         const userChoice = lang.find(item =>item.startsWith(userAnswer.toLowerCase()));
         console.log(`Выбор игрока: ${userChoice}`);
 
-        if (!lang.includes(userChoice)) {
+        if (!lang.includes(userChoice) || userAnswer === '') {
           return getUserAnswer();
         }
         return lang.indexOf(userChoice);
