@@ -2,12 +2,17 @@
 
 (() => {
   const figures = ['камень', 'ножницы', 'бумага'];
+  const figuresEng = ['rock', 'scissors', 'paper'];
 
-  const game = () => {
+  const game = (language) => {
     const result = {
       player: 0,
       computer: 0,
     };
+    const lang = language === 'EN' || language === 'ENG' ?
+    figuresEng : figures;
+    console.log(lang);
+
     return function start() {
       const getRandomInt = (min, max) => {
         min = Math.ceil(min);
@@ -16,11 +21,11 @@
       };
       const computerNumber = getRandomInt(0, 2);
       console.log(`Случайное число: ${computerNumber}`);
-      const computerChoice = figures[computerNumber];
+      const computerChoice = lang[computerNumber];
       console.log(`Выбор компьютера: ${computerChoice}`);
 
-      const getUserAnswer = () => {
-        const userAnswer = prompt(`Выбери: ${figures.join(', ')}`, '');
+      const getUserAnswer = (language) => {
+        const userAnswer = prompt(`${lang.join(', ')} ?`, '');
         if (userAnswer === null) {
           const endGame = confirm('Точно хочешь выйти?');
           if (endGame === false) {
@@ -29,20 +34,20 @@
           alert(`Счет: игрок - ${result.player}, компьютер - ${result.computer}`);
           return;
         }
-        const userChoice = figures.find(item =>item.startsWith(userAnswer.toLowerCase()));
+        const userChoice = lang.find(item =>item.startsWith(userAnswer.toLowerCase()));
         console.log(`Выбор игрока: ${userChoice}`);
 
-        if (!figures.includes(userChoice)) {
+        if (!lang.includes(userChoice)) {
           alert('Можно выбирать только предложенные варианты');
           return getUserAnswer();
         }
 
-        return figures.indexOf(userChoice);
+        return lang.indexOf(userChoice);
       };
       const userNumber = getUserAnswer();
       console.log(`Число игрока: ${userNumber}`);
 
-      const getWinner = () => {
+      const getWinner = (lang) => {
         const subtraction = computerNumber - userNumber;
         console.log(`разница: ${subtraction}`);
 
