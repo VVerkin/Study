@@ -4,10 +4,20 @@
   const figures = ['камень', 'ножницы', 'бумага'];
   const figuresEng = ['rock', 'scissors', 'paper'];
 
+
   const game = (language) => {
     const result = {
       player: 0,
       computer: 0,
+    };
+    const dict = {
+      youWin: ['you win', 'ты выиграл'],
+      youLose: ['you lose', 'ты проиграл'],
+      draw: ['draw', 'ничья'],
+      quit: ['quit', 'выйти'],
+      score: ['score', 'счет'],
+      player: ['player', 'игрок'],
+      computer: ['computer', 'компьютер'],
     };
     const lang = language === 'EN' || language === 'ENG' ?
     figuresEng : figures;
