@@ -10,18 +10,33 @@
       player: 0,
       computer: 0,
     };
-    const dict = {
-      youWin: ['you win', 'ты выиграл'],
-      youLose: ['you lose', 'ты проиграл'],
-      draw: ['draw', 'ничья'],
-      quit: ['quit', 'выйти'],
-      score: ['score', 'счет'],
-      player: ['player', 'игрок'],
-      computer: ['computer', 'компьютер'],
+    const dictEng = {
+      youWin: 'you win',
+      youLose: 'you lose',
+      draw: 'draw',
+      quit: 'quit',
+      score: 'score',
+      player: 'player',
+      computer: 'computer',
+      choice: 'choice',
     };
+    const dictRu = {
+      youWin: 'ты выиграл',
+      youLose: 'ты проиграл',
+      draw: 'ничья',
+      quit: 'выйти',
+      score: 'счет',
+      player: 'игрок',
+      computer: 'компьютер',
+      choice: 'выбрал',
+    };
+
     const lang = language === 'EN' || language === 'ENG' ?
     figuresEng : figures;
     console.log(lang);
+    const dict = language === 'EN' || language === 'ENG' ?
+    dictEng : dictRu;
+    console.log(dict);
 
     return function start() {
       const getRandomInt = (min, max) => {
@@ -37,18 +52,12 @@
       const getUserAnswer = () => {
         const userAnswer = prompt(`${lang.join(', ')} ?`, '');
         if (userAnswer === null) {
-          const endGame = language === 'EN' || language === 'ENG' ?
-          confirm('Do you want to quit the game?') :
-          confirm('Точно хочешь выйти?');
+          const endGame = confirm(`${dict.quit}?`);
 
           if (endGame === false) {
             return getUserAnswer();
           }
-          if (language === 'EN' || language === 'ENG') {
-            alert(`Score: player - ${result.player}, computer - ${result.computer}`);
-          } else {
-            alert(`Счет: игрок - ${result.player}, компьютер - ${result.computer}`);
-          }
+            alert(`${dict.score}: ${dict.player} - ${result.player}, ${dict.computer} - ${result.computer}`);
           return;
         }
         const userChoice = lang.find(item =>item.startsWith(userAnswer.toLowerCase()));
@@ -67,26 +76,14 @@
         console.log(`разница: ${subtraction}`);
 
         if (subtraction === 0) {
-          if (language === 'EN' || language === 'ENG') {
-            alert('Draw');
-          } else {
-            alert('Ничья');
-          }
+            alert(`${dict.draw}!`);
           return start();
         } else if (subtraction === 1 || subtraction === -2) {
-          if (language === 'EN' || language === 'ENG') {
-            alert(`You win! The computer chose ${computerChoice}`);
-          } else {
-            alert(`Ты победил! Компьютер выбрал ${computerChoice}`);
-          }
+            alert(`${dict.youWin}! ${dict.computer} ${dict.choice}: ${computerChoice}`);
           result.player += 1;
           return start();
         } else if (subtraction === -1 || subtraction === 2) {
-          if (language === 'EN' || language === 'ENG') {
-            alert(`You lose! The computer chose ${computerChoice}`);
-          } else {
-            alert(`Ты проиграл! Компьютер выбрал ${computerChoice}`);
-          }
+            alert(`${dict.youLose}! ${dict.computer} ${dict.choice}: ${computerChoice}`);
           result.computer += 1;
           return start();
         }
