@@ -47,22 +47,22 @@
       console.log(playerNumber);
 
       const getWinner = () => {
-      if (balls.bot > 0 || balls.player > 0) {
-
-          if ((playerNumber % 2 === 0 && computerNumber % 2 === 0) || (playerNumber % 2 !== 0 && computerNumber % 2 !== 0)) {
-          alert('Компьютер угадал!');
+        if (balls.bot > 0 && balls.player > 0) {
+          if ((playerNumber % 2 === 0 && computerNumber % 2 === 0) ||
+          (playerNumber % 2 !== 0 && computerNumber % 2 !== 0)) {
+            alert('Компьютер угадал!');
             balls.bot += playerNumber;
             balls.player -= playerNumber;
+          } else {
+            alert('Компьютер не угадал!');
+            balls.player += playerNumber;
+            balls.bot -= playerNumber;
+          }
         } else {
-          alert('Компьютер не угадал!');
-          balls.player += playerNumber;
-          balls.bot -= playerNumber;
+          alert('игра закончена!');
         }
-      } else {
-        alert('игра закончена!');
-      }
-      return start();
-    };
+        return start();
+      };
       console.log(balls);
       getWinner();
     };
