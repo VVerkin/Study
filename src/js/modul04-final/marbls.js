@@ -1,7 +1,7 @@
 'use strict';
 
 (() => {
-  const evenOdd = ['четное', 'нечетное'];
+  const evenOrOdd = ['четное', 'нечетное'];
 
   const game = () => {
     const balls = {
@@ -14,12 +14,11 @@
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1) + min);
       };
-      const computerChoice = getRandomInt(0, evenOdd.length - 1);
+      const computerChoice = getRandomInt(0, evenOrOdd.length - 1);
       console.log(`Выбор компьютера: ${computerChoice}`);
 
-
       const getUserNumber = () => {
-        let userNumber = prompt(`Введи число от 1 до  ${balls.player}`, '');
+        let userNumber = prompt(`Введи число от 1 до ${balls.player}`, '');
         if (userNumber === null) {
           const endGame = confirm('Точно хочешь выйти?');
           if (endGame === false) {
@@ -35,7 +34,7 @@
         }
         if (!isNaN(userNumber)) {
           userNumber = +userNumber;
-          if (userNumber => 1 || userNumber <= balls.player) return userNumber;
+          if (userNumber > 0 || userNumber <= balls.player) return userNumber;
           alert(`Число должно быть от 1 до ${balls.player}`);
         } else {
           alert('Введи число');
@@ -45,29 +44,27 @@
       const userChoice = getUserNumber();
       console.log(userChoice);
 
+
       const getWinner = () => {
-        if ((userChoice % 2 === 0 && computerChoice === 0) ||
+        if (balls.bot >= 1 && balls.player >= 1) {
+          if ((userChoice % 2 === 0 && computerChoice === 0) ||
           (userChoice % 2 !== 0 && computerChoice === 1)) {
-          alert(`Ты проиграл! Компьютер выбрал ${evenOdd[computerChoice]}`);
-          balls.bot += userChoice;
-          balls.player -= userChoice;
+            alert(`Ты проиграл! Компьютер выбрал ${evenOrOdd[computerChoice]}`);
+            balls.bot += userChoice;
+            balls.player -= userChoice;
+            return start();
+          } else {
+            alert(`Ты выиграл! Компьютер выбрал ${evenOrOdd[computerChoice]}`);
+            balls.player += userChoice;
+            balls.bot -= userChoice;
+            return start();
+          }
         } else {
-          alert(`Ты выиграл! Компьютер выбрал ${evenOdd[computerChoice]}`);
-          balls.player += userChoice;
-          balls.bot -= userChoice;
-        }
-        if (balls.bot < 1) {
-          alert(`Игра окончена! Ты победил! Счет: 
-          игрок:${balls.player}, компьютер:${balls.bot}`);
-          return;
-        } else if (balls.player < 1) {
-          alert(`Игра окончена! Ты проиграл! Счет: 
-          игрок:${balls.player}, компьютер:${balls.bot}`);
+          alert(`Игра окончена! Счет: игрок: ${balls.player}, 
+          компьютер: ${balls.bot}`);
           return;
         }
-        return start();
       };
-      console.log(balls);
       getWinner();
     };
   };
