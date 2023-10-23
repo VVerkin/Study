@@ -1,5 +1,21 @@
 'use strict';
 
+/*
+- Игрок загадывает число и вводит его в prompt
+Число от 1-го до количества имеющихся у
+него шариков
+- Бот рандомно угадывает чётное или нечётное
+количество шариков
+- Если угадал то забирает все шарики
+загаданное количество шариков суммируются
+к шарикам бота и вычитаются у игрока
+- Если бот не угадал то это количество шариков
+суммируются к шарикам игрока и вычитаются
+у бота
+- Проигрывает тот у кого закончились
+шарики
+*/
+
 // Функционал скрыт в отдельном модуле IIFE
 (() => {
   // Массив с вариантами ответа компьютера
@@ -22,136 +38,63 @@
       console.log(`Компьютер выбрал: ${evenOrOdd[computerChoice]}`);
       // Ф-я определения победителя
       const getWinner = () => {
-        // Получаем число поьзователя от 1 до имеющегося у него кол-ва шариков
-        let userNumber = prompt(`Введи число от 1 до ${balls.player}`, '');
-        // Если пользователь нажал отмену, то спрашиваем хочет ли он выйти
-        if (userNumber === null) {
-          const endGame = confirm('Точно хочешь выйти?');
-          // Если нажал отмену, то возвращаемся в игру
-          if (endGame === false) {
-            return start();
+        let userNumber = '';
+        // Цикл для запроса ввода данных от пользователя
+        do {
+          userNumber = prompt(`Введи число от 1 до ${balls.player}`, '');
+          // Реализован выход по нажатию кнопки "Отмена"
+          if (userNumber === null) {
+            // Вопрос для подтверждения выхода
+            const endGame = confirm('Точно хочешь выйти?');
+            // Если нажал отмену, то возвращаемся в игру
+            if (endGame === false) {
+              return start();
+            }
+            // Если нажал "Ок", то выводим счет и завершаем игру
+            alert(`Счет: игрок - ${balls.player}, 
+              компьютер - ${balls.bot}`);
+            return;
           }
-          // Если нажал "Ок", то выводим счет и завершаем игру
-          alert(`Счет: игрок - ${balls.player}, 
-            компьютер - ${balls.bot}`);
-          return;
-        }
-        // Выполняем проверку ввода пользователя на число и диапазон имеющихся у
-        if (isNaN(userNumber) || userNumber < 1 || userNumber > balls.player) {
-          alert(`Введи число от 1 до ${balls.player}`);
-        } else {
-          userNumber = +userNumber;
-          if (((userNumber % 2 === 0) && (computerChoice === 0)) ||
-            ((userNumber % 2 !== 0) && (computerChoice === 1))) {
-            alert(`Ты проиграл! 
-              Компьютер выбрал ${evenOrOdd[computerChoice]}`);
-            balls.bot += +userNumber;
-            balls.player -= +userNumber;
-            if (balls.player <= 0 || balls.bot >= 10) {
-              alert(`Игра окончена! Компьютер победил!
+          /* Цикл выполняется, покапользователь вводит не число
+          или число меньше 1 или болше имеющихся шариков
+          */
+        } while (isNaN(userNumber) ||
+        userNumber < 1 || userNumber > balls.player);
+        // Условие победы/проигрыша пользователя
+        if ((userNumber % 2 === computerChoice)) {
+          alert(`Ты проиграл! 
+              Компьютер выбрал ${evenOrOdd[computerChoice]} число`);
+          balls.bot += +userNumber;
+          balls.player -= +userNumber;
+          if (balls.player <= 1 || balls.bot >= 9) {
+            balls.bot += balls.player;
+            balls.player = 0;
+            alert(`Игра окончена! Компьютер победил!
                 Счет: игрок: ${balls.player}, 
                   компьютер: ${balls.bot}`);
-              return;
-            } else {
-              console.log(balls);
-              return start();
-            }
+            return;
           } else {
-            alert(`Ты выиграл! 
+            return start();
+          }
+        } else {
+          alert(`Ты выиграл! 
               Компьютер выбрал ${evenOrOdd[computerChoice]}`);
-            balls.player += +userNumber;
-            balls.bot -= +userNumber;
-            if (balls.bot <= 0 || balls.player >= 10) {
-              alert(`Игра окончена! Ты победил! Счет: игрок: ${balls.player}, 
+          balls.player += +userNumber;
+          balls.bot -= +userNumber;
+          if (balls.bot <= 1 || balls.player >= 9) {
+            balls.player += balls.bot;
+            balls.bot = 0;
+            alert(`Игра окончена! Ты победил! Счет: игрок: ${balls.player}, 
                 компьютер: ${balls.bot}`);
-              return;
-            } else {
-              console.log(balls);
-              return start();
-            }
+            return;
+          } else {
+            return start();
           }
         }
-        return getWinner();
       };
       getWinner();
     };
   };
   window.marbls = game;
 })();
-
-// (() => {
-//   const evenOrOdd = ['четное', 'нечетное'];
-
-//   const game = () => {
-//     const balls = {
-//       player: 5,
-//       bot: 5,
-//     };
-//     return function start() {
-//       const getRandomInt = (min, max) => {
-//         min = Math.ceil(min);
-//         max = Math.floor(max);
-//         return Math.floor(Math.random() * (max - min + 1) + min);
-//       };
-//       const computerChoice = getRandomInt(0, evenOrOdd.length - 1);
-//       console.log(`Выбор компьютера: ${computerChoice}`);
-
-//       const getUserNumber = () => {
-//         let userNumber = prompt(`Введи число от 1 до ${balls.player}`, '');
-//         if (userNumber === null) {
-//           const endGame = confirm('Точно хочешь выйти?');
-//           if (endGame === false) {
-//             return getUserNumber();
-//           }
-//           alert(`Счет: игрок - ${balls.player}, 
-//             компьютер - ${balls.bot}`);
-//           return;
-//         }
-//         if (!isNaN(userNumber)) {
-//           userNumber = +userNumber;
-//           if ((userNumber > 0 && userNumber <= balls.player)) return userNumber;
-//           alert(`Число должно быть от 1 до ${balls.player}`);
-//         } else {
-//           alert('Введи число');
-//         }
-//         return getUserNumber();
-//       };
-//       const userChoice = getUserNumber();
-//       console.log(`Число игрока ${userChoice}`);
-
-
-//       const getWinner = () => {
-//         if (((userChoice % 2 === 0) && (computerChoice === 0)) ||
-//           ((userChoice % 2 !== 0) && (computerChoice === 1))) {
-//           alert(`Ты проиграл! Компьютер выбрал ${evenOrOdd[computerChoice]}`);
-//           balls.bot += +userChoice;
-//           balls.player -= +userChoice;
-//           if (balls.player <= 1 || balls.bot >= 9) {
-//             alert(`Игра окончена! Компьютер победил! Счет: игрок: ${balls.player}, 
-//                 компьютер: ${balls.bot}`);
-//             return;
-//           } else {
-//             console.log(balls);
-//             return start();
-//           }
-//         } else {
-//           alert(`Ты выиграл! Компьютер выбрал ${evenOrOdd[computerChoice]}`);
-//           balls.player += +userChoice;
-//           balls.bot -= +userChoice;
-//           if (balls.bot <= 1 || balls.player >= 9) {
-//             alert(`Игра окончена! Ты победил! Счет: игрок: ${balls.player}, 
-//               компьютер: ${balls.bot}`);
-//             return;
-//           } else {
-//             console.log(balls);
-//             return start();
-//           }
-//         }
-//       };
-//       getWinner();
-//     };
-//   };
-//   window.marbls = game;
-// })();
-
 
