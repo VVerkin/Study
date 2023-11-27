@@ -28,24 +28,25 @@ let input;
 
 // Функция для добавления элемента в список
 function addListItem(input) {
+  if (input && input.trim().length)  {
     list.insertAdjacentHTML('beforeend',`<li>${input}</li>`)
+  }
 }
 
 // Функция удаляет последний элемент списка
 function removeLastItem () { 
   const lastItem = list.lastChild;
-lastItem.remove();
+  lastItem.remove();
 }
 
 // Функция очищает список
 function clearList () {
-    list.forEach(element => {
-      remove();
-    });
-    }
+  list.textContent = '';
+}
 
-
+// Функция позволяет создавать список и управлять его элементами
 function doList () {
+// Запуск непрерывного цикла  
   while (true) {
     input = prompt('Введите строку', '');
 
