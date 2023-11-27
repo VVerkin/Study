@@ -23,3 +23,42 @@
 Внешний вид на ваше усмотрение
 */
 
+const list = document.querySelector('.list');
+let input;
+
+// Функция для добавления элемента в список
+function addListItem(input) {
+    list.insertAdjacentHTML('beforeend',`<li>${input}</li>`)
+}
+
+// Функция удаляет последний элемент списка
+function removeLastItem () { 
+  const lastItem = list.lastChild;
+lastItem.remove();
+}
+
+// Функция очищает список
+function clearList () {
+    list.forEach(element => {
+      remove();
+    });
+    }
+
+
+function doList () {
+  while (true) {
+    input = prompt('Введите строку', '');
+
+    if (input === null || input.toLowerCase() === "exit") {
+      break;
+    } else if (input.toLowerCase() === "del") {
+      removeLastItem();
+    } else if (input.toLowerCase() === "clear") {
+      clearList();
+    } else {
+      addListItem(input);
+      console.log(`Добавлен элеимент: ${input}`);
+    }
+  }
+}
+doList();
