@@ -49,15 +49,14 @@ function doList () {
 // Запуск непрерывного цикла  
   while (true) {
     input = prompt('Введите строку', '');
-
-    if (input === null || input.toLowerCase() === "exit") {
+    if (input === null || input.toLowerCase() === "exit") { // Услоие, при котором цикл прерывается
       break;
-    } else if (input.toLowerCase() === "del") {
+    } else if (input.toLowerCase() === "del") { // Удаление последнего элемента, если пользователь ввел del
       removeLastItem();
-    } else if (input.toLowerCase() === "clear") {
+    } else if (input.toLowerCase() === "clear") { // Удаление последнего элемента, если пользователь ввел clear
       clearList();
     } else {
-      addListItem(input);
+      addListItem(input); // Добавление элемента в список
       console.log(`Добавлен элеимент: ${input}`);
     }
   }
