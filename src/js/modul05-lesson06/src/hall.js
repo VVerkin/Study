@@ -54,8 +54,26 @@
   };
 
   // Всавляем заллы, которые создаются в createArea в app
-  app.append(createArea(2, 3));
-  app.append(createArea(2, 3));
-  app.append(createArea(2, 3));
+  app.append(createArea(5, 6));
+  app.append(createArea(8, 6));
+  app.append(createArea(6, 6));
+
+// Навешаем событие на app (можно было и на зал) что бы не навешивать событие на каждый стул.
+// Применим делегирование
+  app.addEventListener('click', event => {
+    const target = event.target;
+    // Создаем условие, при котором событие сробатывает только при клике на стул
+    if (target.classList.contains('seat')) {
+        // Переменная для определения места и передачи в алерт
+        const seat = target.dataset.seatNumber;
+        // Переменная для определения ряда и передачи в алерт
+        const line = target.closest('.line').dataset.lineNumber;
+        // Переменная для определения зала и передачи в алерт
+        const area = target.closest('.area').dataset.areaNumber;
+        // Меняем цвет нажатого объекта
+        target.style.backgroundColor = 'green';
+        alert(`Ваш зал №${area} / ряд №${line} / место №${seat}`);
+    }
+});
 }
 
