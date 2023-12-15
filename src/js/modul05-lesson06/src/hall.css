@@ -1,0 +1,27 @@
+/* Задаем стили для залов что бы они могли перемещаться если не помещаются */
+#app {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Задаем стили для зала: фон и ряды с отступами */
+.area {
+    background-color: antiquewhite;
+    display: inline-flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+/* Линии, где будут размещаться стулья в ряд с расстоянием */
+.line {
+    display: flex;
+    padding: 5px;
+    gap: 5px;
+}
+
+/* Стили для стула */
+.seat {
+    width: 20px;
+    height: 20px;
+    background-color: brown;
+}
