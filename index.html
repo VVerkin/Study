@@ -7,6 +7,10 @@
     <!-- <link rel="stylesheet" href="src/css/index.css" /> -->
 
     <title>Study</title>
+    <link rel="icon" href="img/icon.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="src/js/modul05-lesson07/form.css">
     <!-- <script defer src="./src/js/modul04-lesson02/einstein.js"></script>
     <script defer src="./src/js/modul04-lesson03/crm.js"></script>
     <script defer src="./src/js/modul04-lesson03/tasks.js"></script>
@@ -43,30 +47,79 @@
     <!-- <script defer src="./src/js/modul04-final/marbls.js"></script>
     <script defer src="./src/js/modul04-final/script.js"></script> -->
     <!-- <script defer src="./src/js/modul05-lesson03/list.js"></script> -->
-    <script defer src="./src/js/modul05-lesson03/row.js"></script>
+    <!-- <script defer src="./src/js/modul05-lesson03/row.js"></script> -->
+    <script src="./src/js/modul05-lesson07/form.js" defer></script>
   </head>
 
   <body>
-    <h1>Список</h1>
-    <ul class = "list"></ul>
-
-    <h2>Таблица</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Название</th>
-          <th>Цена</th>
-          <th>Описание</th>
-          <th>Категория</th>
-          <th>Скидка</th>
-          <th>Количество</th>
-          <th>Единица изм.</th>
-          <th>Фото</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+    <div class="container">
+      <form class="my-form">
+        <h2 class="form-title">Форма</h2>
+    
+        <div class="form-group">
+          <label class="form-label" for="name">Имя:</label>
+          <input class="form-input input-name" name="name" id="name" type="text">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="surname">Фамилия:</label>
+          <input class="form-input input-surname" name="surname" id="surname" type="text">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="phone">Телефон:</label>
+          <input class="form-input" name="phone" id="phone" type="number">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="mail">e-mail:</label>
+          <input class="form-input" name="mail" id="mail" type="email">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="file">Файл</label>
+          <input class="form-input" name="file" id="file" type="file">
+        </div>  
+        <div class="form-group">
+          <label class="form-label" for="count">Кол-во</label>
+          <input class="form-input input-range" name="count" id="count" type="range">
+        </div>    
+        <div class="form-group">
+          <label class="form-label" for="description">Описание</label>
+          <textarea class="form-input" name="description" id="description" type="range"></textarea>
+        </div>    
+        <div class="form-group">
+          <label class="form-label-flex">
+            <input name="age" type="checkbox" value="yes">Есть 18?
+          </label>
+    
+          <fieldset class="form-group fieldset-radio">
+            <legend>Цвет</legend>
+            <label class="form-label-flex">
+              <input name="color" type="radio" value="red">Красный
+            </label>
+            <label class="form-label-flex">
+              <input name="color" type="radio" value="green">Зеленый
+            </label>
+            <label class="form-label-flex">
+              <input name="color" type="radio" value="orange">Оранжевый 
+            </label>
+            <label class="form-label-flex">
+              <input name="color" type="radio" value="yellow">Желтый
+            </label>
+          </fieldset>
+    
+          <div class="form-group">
+            <label class="form-label" for="description">Размер</label>
+            <select class="form-input" name="size">
+              <option value="xs">XS</option>
+              <option value="s">S</option>
+              <option value="m">M</option>
+              <option value="l">L</option>
+              <option value="xl">XL</option>
+              <option value="xxl">XXL</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary mr-3">Добавить</button>
+          <button type="игеещт" class="btn btn-danger btn-reset">Сброс</button>
+        </div> 
+      </form>
+    </div>
   </body>
 </html>
