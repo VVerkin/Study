@@ -48,7 +48,8 @@
     <script defer src="./src/js/modul04-final/script.js"></script> -->
     <!-- <script defer src="./src/js/modul05-lesson03/list.js"></script> -->
     <!-- <script defer src="./src/js/modul05-lesson03/row.js"></script> -->
-    <script src="./src/js/modul05-lesson07/form.js" defer></script>
+    <!-- <script src="./src/js/modul05-lesson07/form.js" defer></script> -->
+    <script src="./src/js/modul05-lesson07/form-checkbox.js" defer></script>
   </head>
 
   <body>
@@ -88,7 +89,7 @@
           <label class="form-label-flex">
             <input name="age" type="checkbox" value="yes">Есть 18?
           </label>
-    
+        </div>
           <fieldset class="form-group fieldset-radio">
             <legend>Цвет</legend>
             <label class="form-label-flex">
@@ -116,9 +117,27 @@
               <option value="xxl">XXL</option>
             </select>
           </div>
+
+          <fieldset class="form-group">
+            <legend>Фрукты</legend>
+            <label class="form-label-flex">
+              <input name="fruit" type="checkbox" value="mandarin">Мандарин
+            </label>
+
+            <label class="form-label-flex">
+              <input name="fruit" type="checkbox" value="apple">Яблоко
+            </label>
+            <label class="form-label-flex">
+              <input name="fruit" type="checkbox" value="orange">Апельсин
+            </label>            
+            <label class="form-label-flex">
+              <input name="fruit" type="checkbox" value="banaba">Банан
+            </label>
+          </fieldset>
+
           <button type="submit" class="btn btn-primary mr-3">Добавить</button>
-          <button type="игеещт" class="btn btn-danger btn-reset">Сброс</button>
-        </div> 
+          <button type="button" class="btn btn-danger btn-reset">Сброс</button>
+
       </form>
     </div>
   </body>
