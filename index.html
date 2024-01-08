@@ -50,7 +50,8 @@
     <!-- <script defer src="./src/js/modul05-lesson03/list.js"></script> -->
     <!-- <script defer src="./src/js/modul05-lesson03/row.js"></script> -->
     <!-- <script src="./src/js/modul05-lesson07/form.js" defer></script> -->
-    <script src="./src/js/modul05-lesson07/form-checkbox.js" defer></script>
+    <!-- <script src="./src/js/modul05-lesson07/form-checkbox.js" defer></script> -->
+    <script src="./src/js/modul05-lesson08/form.js" defer></script>
   </head>
 
   <body>
@@ -144,33 +145,32 @@
       </form>
     </div> -->
 
-    <div class="container">
-      <form class="storage local-storage">
 
-        <div class="session-storage">
+    <!-- Верстка для урока 5.8 -->
+    <div class="container">
+        <form class=" storage session-storage">
           <h2>sesionStorage</h2>
           <label class="color">Color
-            <input name="color" type="color">
+            <input name="color" type="color" value="#ffffff">
           </label>
           <label class="color">font-size
-            <input name="font-size" type="number" value ="15">
+            <input class="session-font-size" name="font-size" type="number" value ="16">
           </label>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ratione corporis deserunt error sunt minima, distinctio nostrum maxime pariatur qui! Modi cumque voluptates quis qui sunt sapiente quam asperiores autem?</p>
-          <button type="button">сбросить</button>
+          <button type="button" class="reset-session">сбросить</button>
 
-        </div>
-        <div class="local-storage">
+        </form>
+        <form class="storage local-storage">
           <h2>localStorage</h2>
           <label class="color">Color
-            <input name="color" type="color">
+            <input name="color" type="color" value="#ffffff">
           </label>
           <label class="color">font-size
-            <input name="font-size" type="number" value ="15">
+            <input class="local-font-size" name="font-size" type="number" value ="16">
           </label>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ratione corporis deserunt error sunt minima, distinctio nostrum maxime pariatur qui! Modi cumque voluptates quis qui sunt sapiente quam asperiores autem?</p>
-          <button type="button">сбросить</button>
-        </div>
-      </form>
+          <button type="button" class="reset-local">сбросить</button>
+        </form>
     </div>
   </body>
 </html>
