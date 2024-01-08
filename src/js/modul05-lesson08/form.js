@@ -21,24 +21,31 @@ container.addEventListener('change', e => {
   // Получим кого-то из родителей (у них есть рамки)
   // (это могут быть session или local storage, у них есть общий класс storage)
   const parent = target.closest('.storage');
-  // У родителя меням стиль (фон) на тот, который мы выберем в поле color
-  parent.style.backgroundColor = parent.color.value;
-  // У родителя меням стиль (размер шрифта) на тот, который мы выберем в поле font-size
-  // Свойство записано через дефис, поэтому храним его в виде строки в квадратных скобках
-  parent.style.fontSize = parent['font-size'].value + 'px';
+
+  // Сохраним наши данные как объект
+  // Все свойства возьмем у родителей
+  const style = {
+    backgroundColor: parent.color.value,
+    fontSize: parent['font-size'].value,
+  };
+
+  // Теперь используем сохраненные в объект данные для вывода на страницу
+  parent.style.backgroundColor = style.backgroundColor;
+  parent.style.fontSize = style.fontSize + 'px';
   // Теперь у нас меняются фон и размер шрифта при выборе их в соотв. полях
 
   // Определяем в каком из блоков происходит событие
   if (parent === session) {
     console.log('session');
-    // Отправляем в sessionStorage поле, которое поменялось
-    sessionStorage.setItem(target.name, target.value);
+    // Отправляем в sessionStorage поле, которое поменялось и конвертируем объект
+    sessionStorage.setItem('session-style', JSON.stringify(style));
   }
 
   if (parent === local) {
     console.log('local');
-    // Отправляем в localStorage поле, которое поменялось
-    localStorage.setItem(target.name, target.value);
+    // Отправляем в localStorage поле, которое поменялось и конвертируем объект
+    sessionStorage.setItem('session-style', JSON.stringify(style));
+    localStorage.setItem('local-style', JSON.stringify(style));
   }
 });
 
@@ -46,27 +53,34 @@ container.addEventListener('change', e => {
 // Функция при загрузки страницы запускается и инициализируется 
 // подхватывая необходимые стили
 const init = () => {
+  // Создадим объект, который получаем из sesionStorage и распарсиваем полученный из ss объект
+  const sessionStyle = JSON.parse(sessionStorage.getItem('session-style'));
+  console.log('sessionStyle:', sessionStyle);
+
   /* обращаемся к session, у него есть font-size, сразу задаем value, 
   что бы значение поменялось и забираем его из session storage*/
-  session['font-size'].value = sessionStorage.getItem('font-size') ||
+  session['font-size'].value = sessionStyle?.fontSize ||
     session['font-size'].value;
   // То же самое проделываем и для color
-  session.color.value = sessionStorage.getItem('color') ||
+  session.color.value = sessionStyle?.backgroundColor ||
     session.color.value;
   /* При запуске в первый раз значений может не быть в session или 
   local storage, поэтому добавляем условия (или) с новой строки, в которых 
   прописываем  исходные значеения,  если их не получили. */
 
-  // Аналогично все делаем и для local
-  local['font-size'].value = localStorage.getItem('font-size') ||
-    local['font-size'].value;
-  local.color.value = localStorage.getItem('color') ||
-    local.color.value;
-
-  // Значения подтянулись, но пока не применяются к самой странице.
+    // Значения подтянулись, но пока не применяются к самой странице.
   // Для этого нужно прописать для самих элементов данные стили. Как выше делали для parent
   session.style.backgroundColor = session.color.value;
   session.style.fontSize = session['font-size'].value + 'px';
+
+  const localStyle = JSON.parse(localStorage.getItem('local-style'));
+  console.log('localStyle:', localStyle);
+
+  // Аналогично все делаем и для local
+  local['font-size'].value = localStyle?.fontSize ||
+    local['font-size'].value;
+  local.color.value = localStyle?.backgroundColor ||
+    local.color.value;
 
   local.style.backgroundColor = local.color.value;
   local.style.fontSize = local['font-size'].value + 'px';
@@ -89,3 +103,25 @@ resetLocal.addEventListener('click', () => {
   init();
 });
 init();
+// У глобального объекта window есть определенная особенность – событие storage.
+// Добавив ф-ю init, меняя значенния в localStorage на одной вкладке, поменяется и на другой
+window.addEventListener('storage', e => {
+  console.log(e);
+  init();
+});
+
+// При работе с localStorage, если хотим хранить много данных
+// и их нужно в какой-то момент перебирать, то лучше всего использовать
+const getLocalStorageData = () => Object.entries(localStorage)
+  .reduce((acc, [key, value]) => {
+    let newValue;
+    try {
+      newValue = JSON.parse(value);
+    } catch {
+      nawValue = value;
+    }
+    return {
+      ...acc,
+      [key]: newValue,
+    };
+  })
