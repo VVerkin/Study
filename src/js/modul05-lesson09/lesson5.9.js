@@ -12,7 +12,7 @@ const $ = (() => {
   return {
     app,
     openVar,
-    getData
+    getData,
   };
 })();
 
